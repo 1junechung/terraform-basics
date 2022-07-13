@@ -79,6 +79,7 @@
 # dynamic blocks
     https://www.terraform.io/language/expressions/dynamic-blocks#dynamic-blocks
     Inputting Variables -> depending on # of vars -> will create that much resources
+        * for_each {var }
 
 
 # provisioner 
@@ -95,3 +96,23 @@
     https://www.terraform.io/language/resources/provisioners/file#file-provisioner
         - files can also be copied to EC2
 
+# modules TBD 
+
+
+# workspace 
+    For separate statefiles mostly 
+        terraform workspace new dev
+        -> inside terraform.tfstate.d -> there will be multiple states 
+    Might need different variable files (def.tfvars, prod.tfvars) 
+
+    - Can also refer as variable
+        locals{ environment = ${terraform.workspace} }
+        resource{ tag = local.environment }
+
+# Backend & Remote State 
+    State is precious !  - should always have single source
+        - not recommended to store locally
+        - S3, TFEnterprise, etc 
+            (will lock when someone tf apply)
+            
+    Example S3 backend config : https://www.terraform.io/language/settings/backends/s3#example-configuration
